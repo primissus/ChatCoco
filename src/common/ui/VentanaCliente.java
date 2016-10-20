@@ -30,9 +30,15 @@ public class VentanaCliente extends JFrame {
         this._client.start();
     }
     
+    public VentanaCliente(){
+        iniComponents();
+        createForm();
+        this._client = new Client(this, 14);
+    }
+    
     private void iniComponents(){          
         tabs = new JTabbedPane();
-        
+       
     }
     
     public void addChat(int id) {
@@ -92,14 +98,15 @@ public class VentanaCliente extends JFrame {
     private void createForm(){
         main = new GroupLayout(this.getContentPane());
         
+        this.setSize(450,300);
+        
         this.setLayout(main);
         
         setHGroup();
         setVGroup();
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        this.setSize(450,300);
+        addChat(20);
         this.setResizable(false);
         this.setVisible(true);
     }

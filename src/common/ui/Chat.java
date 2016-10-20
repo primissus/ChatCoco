@@ -51,20 +51,21 @@ public class Chat extends JPanel{
             .addComponent(textArea,200,200,200)
             .addGroup(
                 pt.createSequentialGroup()
-                .addComponent(tfMensaje,50,50,50)
-                .addComponent(btnEnviar)
-            )
-        );
-        
-       pt.setHorizontalGroup(
-            pt.createSequentialGroup()
-            .addComponent(textArea,50,50,50)
-            .addGroup(
-                pt.createParallelGroup()
                 .addComponent(tfMensaje)
                 .addComponent(btnEnviar)
             )
         );
+        
+       pt.setVerticalGroup(
+            pt.createSequentialGroup()
+            .addComponent(textArea,200,200,200)
+            .addGroup(
+                pt.createParallelGroup()
+                .addComponent(tfMensaje,25,25,25)
+                .addComponent(btnEnviar)
+            )
+        );
+       this.setLayout(pt);
     }
     
     public void wrMessage(String content) {

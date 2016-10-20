@@ -5,6 +5,8 @@
  */
 package cocoachat;
 
+import common.ui.VentanaCliente;
+
 /**
  *
  * @author Many
@@ -16,6 +18,7 @@ public class CocoaChat {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        VentanaCliente v = new VentanaCliente(14);
     }
     
 }
