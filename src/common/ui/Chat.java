@@ -39,6 +39,7 @@ public class Chat extends JPanel{
         this.btnEnviar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(!tfMensaje.getText().isEmpty())
                 _c.sendMessage(id, tfMensaje.getText());
             }
         });
