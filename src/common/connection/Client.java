@@ -50,23 +50,24 @@ public class Client extends Thread {
                             int ids[] = rest.getIDs();
                             this._w.setChats(ids, this._id);
                             for(int i = 0; i < ids.length; i++) {
-                                this.requestConversation(ids[i]);
-                                Chat c = this._w.getChat(ids[i]);
-                                XMLParser conversation = this.getXml();
-                                Message []messages = conversation.getMessages();
-                                for(int y = 0; y < messages.length; y++) {
-                                    c.wrMessage(messages[y]);
+                                if(ids[i] != i){
+                                    this.requestConversation(ids[i]);
+                                    Chat c = this._w.getChat(ids[i]);
+                                    XMLParser conversation = this.getXml();
+                                    Message []messages = conversation.getMessages();
+                                    for(int y = 0; y < messages.length; y++) {
+                                        c.wrMessage(messages[y]);
+                                    }
                                 }
                             }
                             break;
                         case XMLParser.RECEIVE_MESSAGE:
-                            XMLParser o = new XMLParser(rest.getContent());
-                            int origin = o.getUserId();
-                            String content = o.getContent();
+                            int origin = rest.getUserId();
+                            String content = rest.getText();
                             for(int i = 0; i < this._w.i; i++) {
                                 Chat c = this._w.chats.get(i);
                                 if(origin == c.id && origin != this._id) {
-                                    c.wrMessage(content);
+                                    c.wrMessage(new Message(origin,content));
                                 }
                             }
                             break;

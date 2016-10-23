@@ -20,7 +20,7 @@ public class CocoaServer {
     private ConnectionServerSocket server;
 
     public CocoaServer() {
-        SQLConnector conn = new SQLConnector();
+        conn = new SQLConnector();
         conn.connect("chat", "root", "");
         server = new ConnectionServerSocket(this);
         server.setRun(true);
@@ -46,9 +46,9 @@ public class CocoaServer {
     public void sendMessage(String data, int origin){
         XMLParser parser = new XMLParser(data);
         int dest = parser.getUserId();
-        parser = new XMLParser(parser.getContent());
-        System.out.println(origin+parser.getUserId()+parser.getText());
-        conn.insertData("mensaje", "org_id, des_id, mensaje", origin+parser.getUserId()+parser.getText());
+        //parser = new XMLParser(parser.getContent());
+    //    System.out.println(origin+parser.getUserId()+parser.getText());
+        conn.insertData("mensaje", "org_id, des_id, mensaje", String.valueOf(origin)+","+String.valueOf(parser.getUserId())+",\""+parser.getText()+"\"");
         parser.replaceDoo(XMLParser.RECEIVE_MESSAGE);
         parser.replaceUserId(origin);
         server.sendData(parser.getDocumentString(), dest);
@@ -58,7 +58,7 @@ public class CocoaServer {
         XMLParser parser = new XMLParser(data);
         switch(parser.getDoo()){ 
             case XMLParser.SEND_MESSAGE:
-                sendMessage(data, origin);
+                    sendMessage(data, origin);
                 break;
             case XMLParser.RECEIVE_CONVERSATION:
                 server.sendData(getConversation(origin, parser.getUserId()), origin);
@@ -70,10 +70,12 @@ public class CocoaServer {
         Message[] mensajes = conn.getMessages(origin, destiny);
         XMLParser documento = new XMLParser();
         documento.createRest(XMLParser.RECEIVE_CONVERSATION,"");
-        for(Message mensaje : mensajes){
-            XMLParser parser = new XMLParser();
-            parser.createMesage(mensaje.getUser_id(), mensaje.getMessage());
-            documento.appendContent(parser.getDocumentString());
+        if(mensajes != null){
+            for(Message mensaje : mensajes){
+                XMLParser parser = new XMLParser();
+                parser.createMesage(mensaje.getUser_id(), mensaje.getMessage());
+                documento.appendContent(parser.getDocumentString());
+            }
         }
         return documento.getDocumentString();
     }

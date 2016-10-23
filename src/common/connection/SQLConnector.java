@@ -70,7 +70,7 @@ public class SQLConnector{
     
     public Message[] getMessages(int user1, int user2){
         Message[] messages;
-        String command = "SELECT org_id,mensaje FROM mensaje WHERE org_id="+user1+" AND dest_id="+user2+" OR org_id="+user2+" AND dest_id="+user1;
+        String command = "SELECT org_id,mensaje FROM mensaje WHERE org_id="+user1+" AND des_id="+user2+" OR org_id="+user2+" AND des_id="+user1;
         PreparedStatement statement;
         
         try {
@@ -80,8 +80,11 @@ public class SQLConnector{
             if(results.last()){
                 messages = new Message[results.getRow()];
                 results.first();               
-                while(!results.isAfterLast())
+                while(!results.isAfterLast()){
                     messages[results.getRow()-1] = new Message(results.getInt(1), results.getString(2));
+                    results.next();
+                }
+                return messages;
             }            
         } catch (SQLException ex) {
             Logger.getLogger(SQLConnector.class.getName()).log(Level.SEVERE, null, ex);

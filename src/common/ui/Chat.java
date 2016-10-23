@@ -70,10 +70,10 @@ public class Chat extends JPanel{
     }
     
     public void wrMessage(String content) {
-        
+        textArea.append("\n"+content);
     }
     
     public void wrMessage(Message m) {
-        
+        textArea.append("\n"+String.valueOf(m.getUser_id())+": "+m.getMessage());
     }
 }
