@@ -22,10 +22,12 @@ public class VentanaCliente extends JFrame {
     public ArrayList<Chat> chats = new ArrayList<Chat>();
     private final Client _client;
     public int i = 0;
+    private int id = 0;
     
     public VentanaCliente(int id){
         iniComponents();
         createForm();
+        this.id = id;
         this._client = new Client(this, id);
         this._client.start();
     }
@@ -116,6 +118,10 @@ public class VentanaCliente extends JFrame {
             main.createSequentialGroup()
             .addComponent(tabs)
         );
+    }
+    
+    public int get_id(){
+        return this.id;
     }
     
     private void setVGroup(){
