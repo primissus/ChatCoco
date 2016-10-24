@@ -39,7 +39,7 @@ public class Client extends Thread {
     private void init() {
         while(true) {
             try {
-                this._socket = new Socket("25.109.73.99", 1234);
+                this._socket = new Socket("192.168.1.67", 1234);
                 this._connOk = true;
                 this.sendMeId();
                 this._w.setTitle("Cliente" + this._id + " {CONECTADO}");
