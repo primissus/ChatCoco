@@ -41,6 +41,7 @@ public class Chat extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(!tfMensaje.getText().isEmpty())
                 _c.sendMessage(id, tfMensaje.getText());
+                textArea.append(String.valueOf(id)+": "+tfMensaje.getText());
             }
         });
         GroupLayout pt = new GroupLayout(this);
