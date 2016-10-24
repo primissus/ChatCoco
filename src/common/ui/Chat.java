@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -27,6 +28,7 @@ public class Chat extends JPanel{
     private final JTextArea textArea;
     private final JTextField tfMensaje;
     private final JButton btnEnviar;
+    private final JScrollPane scroll;
     
     public Chat(int id, VentanaCliente w, Client c){
         this._w = w;
@@ -35,6 +37,8 @@ public class Chat extends JPanel{
         textArea = new JTextArea();
         tfMensaje = new JTextField();
         btnEnviar = new JButton("Enviar");
+        scroll = new JScrollPane(textArea);
+        
         
         this.btnEnviar.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +54,7 @@ public class Chat extends JPanel{
         
         pt.setHorizontalGroup(
             pt.createParallelGroup()
-            .addComponent(textArea,200,200,200)
+            .addComponent(scroll,200,200,200)
             .addGroup(
                 pt.createSequentialGroup()
                 .addComponent(tfMensaje)
@@ -60,7 +64,7 @@ public class Chat extends JPanel{
         
        pt.setVerticalGroup(
             pt.createSequentialGroup()
-            .addComponent(textArea,200,200,200)
+            .addComponent(scroll,200,200,200)
             .addGroup(
                 pt.createParallelGroup()
                 .addComponent(tfMensaje,25,25,25)
