@@ -67,6 +67,7 @@ public class CocoaServer {
     }
     
     public String getConversation(int origin, int destiny){
+
         Message[] mensajes = conn.getMessages(origin, destiny);
         XMLParser documento = new XMLParser();
         documento.createRest(XMLParser.RECEIVE_CONVERSATION,"");

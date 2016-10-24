@@ -105,6 +105,11 @@ public class XMLParser {
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
             Node el = document.getElementsByTagName("content").item(0);
+            if(el == null){
+                el = document.createElement("content");
+                Node rest = document.getElementsByTagName("rest").item(0);
+                rest.appendChild(el);
+            }
             Document aux = builder.parse(new ByteArrayInputStream(extraContent.getBytes()));
             Node node = this.document.importNode(aux.getDocumentElement(), true);
             el.appendChild(node);

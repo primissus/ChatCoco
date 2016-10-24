@@ -19,7 +19,7 @@ public class Message {
     private String message;
 
     public Message(Element info) {
-        this.user_id = Integer.parseInt(info.getElementsByTagName("user_id").item(0).getTextContent());
+        this.user_id = Integer.parseInt(info.getElementsByTagName("user-id").item(0).getTextContent());
         this.message = info.getElementsByTagName("text").item(0).getTextContent();
     }
     

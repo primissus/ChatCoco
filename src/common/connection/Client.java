@@ -50,7 +50,7 @@ public class Client extends Thread {
                             int ids[] = rest.getIDs();
                             this._w.setChats(ids, this._id);
                             for(int i = 0; i < ids.length; i++) {
-                                if(ids[i] != i){
+                                if(ids[i] != _id){
                                     this.requestConversation(ids[i]);
                                     Chat c = this._w.getChat(ids[i]);
                                     XMLParser conversation = this.getXml();
